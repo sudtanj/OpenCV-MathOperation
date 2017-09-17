@@ -2,6 +2,8 @@
 #include <vector>
 #include <iostream>
 #include <algorithm>
+#include <functional>
+#include <numeric>
 void min_matrix(int** matrix, int size);
 void max_matrix(int** matrix, int size);
 void average_matrix(int** matrix, int size);
@@ -21,6 +23,22 @@ int main()
 	matrix[2][0] = 7;
 	matrix[2][1] = 8;
 	matrix[2][2] = 9;
+
+	min_matrix(matrix, 3);
+	for (int i = 0; i < 3; i++) {
+		for (int j = 0; j < 3; j++) {
+			std::cout << matrix[i][j];
+		}
+		std::cout << std::endl;
+	}
+
+	max_matrix(matrix, 3);
+	for (int i = 0; i < 3; i++) {
+		for (int j = 0; j < 3; j++) {
+			std::cout << matrix[i][j];
+		}
+		std::cout << std::endl;
+	}
 
 	average_matrix(matrix, 3);
 	for (int i = 0; i < 3; i++) {
@@ -72,6 +90,6 @@ void average_matrix(int** matrix, int size) {
 	}
 	sort(temp.begin(), temp.end());
 	int sizing = ceil((double)size / 2) - 1;
-	matrix[sizing][sizing] = temp.at(floor((double)temp.size()/2));
+	matrix[sizing][sizing] = std::accumulate(temp.begin(), temp.end(), 0.0) / temp.size() ;
 
 }
